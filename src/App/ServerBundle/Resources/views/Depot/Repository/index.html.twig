@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Depot\Repository list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Path</th>
+                <th>Nom</th>
+                <th>Branching</th>
+                <th>Deployinfo</th>
+                <th>Deploymethod</th>
+                <th>Env</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_repo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.path }}</td>
+                <td>{{ entity.nom }}</td>
+                <td>{{ entity.branching }}</td>
+                <td>{{ entity.deployInfo }}</td>
+                <td>{{ entity.deployMethod }}</td>
+                <td>{{ entity.env }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_repo_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_repo_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('admin_repo_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

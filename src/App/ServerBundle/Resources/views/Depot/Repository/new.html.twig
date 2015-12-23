@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Depot\Repository creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_repo') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
