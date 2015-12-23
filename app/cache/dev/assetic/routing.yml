@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: /Users/TwanoO/Documents/PERSO/GIT/sf-git-branch/app/config/routing_dev.yml

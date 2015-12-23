@@ -3,8 +3,6 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-
-  <div id="container" class="container">
     {% include 'AppClientBundle::Page/modules/slideA.html.twig' %}
     {% include 'AppClientBundle::Page/modules/slideB.html.twig' %}
     <div class="row">
@@ -12,7 +10,11 @@
         <div ng-view></div>
       </div>
     </div>
-  </div>
+
+    <h3>Status</h3>
+    <p>{% for line in status %}
+        {{ line }}<br/>
+    {% endfor %}</p>
 
   <script>var title="{{ title }}";</script>
 
