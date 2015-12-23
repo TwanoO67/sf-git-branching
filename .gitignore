@@ -2,4 +2,5 @@ vendor
 node_modules
 bower_components
 *.swp
-
+app/cache
+app/logs
