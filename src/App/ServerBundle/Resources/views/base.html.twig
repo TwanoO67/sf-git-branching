@@ -59,7 +59,7 @@
              <span class="icon-bar" ></span>
            </button>
            {% block header_nav %}
-           <a class="navbar-brand" href="http://test.weberantoine.fr/GIT/">Gestion GIT   </a>
+           <a class="navbar-brand" href="{{ app.request.getSchemeAndHttpHost() }}/admin/">Gestion GIT - BackOffice  </a>
            <a class="navbar-brand" id='username_placeholder' onclick='changeUsername()' style='float:right'>UserName</a>
            {% endblock %}
 
