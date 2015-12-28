@@ -1,3 +1,7 @@
+app_server_admin_depot:
+    resource: "@AppServerBundle/Resources/config/routing/depot_repository.yml"
+    prefix:   /admin/depot
+
 app_server_homepage:
     path:     /admin
     defaults: { _controller: AppServerBundle:Back:index }

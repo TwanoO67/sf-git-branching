@@ -7,5 +7,6 @@ INSTALLATION
 npm install
 composer update
 
+php app/console assets:install
 php app/console doctrine:schema:update --env=test --force
 grunt serve --force

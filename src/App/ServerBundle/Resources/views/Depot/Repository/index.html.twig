@@ -19,7 +19,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('admin_repo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('admin_depot_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.path }}</td>
                 <td>{{ entity.nom }}</td>
                 <td>{{ entity.branching }}</td>
@@ -29,10 +29,10 @@
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('admin_repo_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_depot_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_repo_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_depot_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -43,7 +43,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('admin_repo_new') }}">
+            <a href="{{ path('admin_depot_new') }}">
                 Create a new entry
             </a>
         </li>

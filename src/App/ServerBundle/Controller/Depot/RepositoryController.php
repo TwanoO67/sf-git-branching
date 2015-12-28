@@ -4,16 +4,13 @@ namespace App\ServerBundle\Controller\Depot;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
 use App\ServerBundle\Entity\Depot\Repository;
 use App\ServerBundle\Form\Depot\RepositoryType;
 
 /**
  * Depot\Repository controller.
  *
- * @Route("/admin/repo")
  */
 class RepositoryController extends Controller
 {
@@ -21,9 +18,6 @@ class RepositoryController extends Controller
     /**
      * Lists all Depot\Repository entities.
      *
-     * @Route("/", name="admin_repo")
-     * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -31,16 +25,13 @@ class RepositoryController extends Controller
 
         $entities = $em->getRepository('AppServerBundle:Depot\Repository')->findAll();
 
-        return array(
+        return $this->render('AppServerBundle:Depot/Repository:index.html.twig', array(
             'entities' => $entities,
-        );
+        ));
     }
     /**
      * Creates a new Depot\Repository entity.
      *
-     * @Route("/", name="admin_repo_create")
-     * @Method("POST")
-     * @Template("AppServerBundle:Depot\Repository:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -53,13 +44,13 @@ class RepositoryController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_repo_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_depot_show', array('id' => $entity->getId())));
         }
 
-        return array(
+        return $this->render('AppServerBundle:Depot/Repository:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
@@ -72,7 +63,7 @@ class RepositoryController extends Controller
     private function createCreateForm(Repository $entity)
     {
         $form = $this->createForm(new RepositoryType(), $entity, array(
-            'action' => $this->generateUrl('admin_repo_create'),
+            'action' => $this->generateUrl('admin_depot_create'),
             'method' => 'POST',
         ));
 
@@ -84,27 +75,21 @@ class RepositoryController extends Controller
     /**
      * Displays a form to create a new Depot\Repository entity.
      *
-     * @Route("/new", name="admin_repo_new")
-     * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new Repository();
         $form   = $this->createCreateForm($entity);
 
-        return array(
+        return $this->render('AppServerBundle:Depot/Repository:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
      * Finds and displays a Depot\Repository entity.
      *
-     * @Route("/{id}", name="admin_repo_show")
-     * @Method("GET")
-     * @Template()
      */
     public function showAction($id)
     {
@@ -118,18 +103,15 @@ class RepositoryController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('AppServerBundle:Depot/Repository:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
      * Displays a form to edit an existing Depot\Repository entity.
      *
-     * @Route("/{id}/edit", name="admin_repo_edit")
-     * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -144,11 +126,11 @@ class RepositoryController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('AppServerBundle:Depot/Repository:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
@@ -161,7 +143,7 @@ class RepositoryController extends Controller
     private function createEditForm(Repository $entity)
     {
         $form = $this->createForm(new RepositoryType(), $entity, array(
-            'action' => $this->generateUrl('admin_repo_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_depot_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,9 +154,6 @@ class RepositoryController extends Controller
     /**
      * Edits an existing Depot\Repository entity.
      *
-     * @Route("/{id}", name="admin_repo_update")
-     * @Method("PUT")
-     * @Template("AppServerBundle:Depot\Repository:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -193,20 +172,18 @@ class RepositoryController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_repo_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_depot_edit', array('id' => $id)));
         }
 
-        return array(
+        return $this->render('AppServerBundle:Depot/Repository:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
     /**
      * Deletes a Depot\Repository entity.
      *
-     * @Route("/{id}", name="admin_repo_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -225,7 +202,7 @@ class RepositoryController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_repo'));
+        return $this->redirect($this->generateUrl('admin_depot'));
     }
 
     /**
@@ -238,7 +215,7 @@ class RepositoryController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_repo_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_depot_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
