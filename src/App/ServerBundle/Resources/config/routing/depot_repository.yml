@@ -1,0 +1,30 @@
+admin_depot:
+    path:     /
+    defaults: { _controller: "AppServerBundle:Depot\Repository:index" }
+
+admin_depot_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppServerBundle:Depot\Repository:show" }
+
+admin_depot_new:
+    path:     /new
+    defaults: { _controller: "AppServerBundle:Depot\Repository:new" }
+
+admin_depot_create:
+    path:     /create
+    defaults: { _controller: "AppServerBundle:Depot\Repository:create" }
+    methods:  POST
+
+admin_depot_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppServerBundle:Depot\Repository:edit" }
+
+admin_depot_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppServerBundle:Depot\Repository:update" }
+    methods:  [POST, PUT]
+
+admin_depot_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppServerBundle:Depot\Repository:delete" }
+    methods:  [POST, DELETE]

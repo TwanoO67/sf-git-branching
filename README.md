@@ -10,3 +10,6 @@ composer update
 php app/console assets:install
 php app/console doctrine:schema:update --env=test --force
 grunt serve --force
+
+génération de crud
+php app/console generate:doctrine:crud --format=yml --with-write --overwrite
