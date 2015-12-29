@@ -18,8 +18,11 @@ security:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-        fos_userbundle:
-                    id: fos_user.user_provider.username
+                    antoine:
+                      password: antoine67
+                      roles: [ 'ROLE_ADMIN']
+    #    fos_userbundle:
+    #                id: fos_user.user_provider.username
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
@@ -27,7 +30,7 @@ security:
         main:
             pattern: ^/
             form_login:
-                provider: fos_userbundle
+                provider: in_memory #fos_userbundle
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true

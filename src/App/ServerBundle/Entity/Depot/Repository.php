@@ -59,15 +59,15 @@ class Repository
     /**
      * @var array
      *
-     * @ORM\Column(name="env", type="array")
+     * @ORM\Column(name="repo", type="string", length=255)
      */
-    private $env;
+    private $repo;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -90,7 +90,7 @@ class Repository
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
@@ -113,7 +113,7 @@ class Repository
     /**
      * Get nom
      *
-     * @return string 
+     * @return string
      */
     public function getNom()
     {
@@ -136,7 +136,7 @@ class Repository
     /**
      * Get branching
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getBranching()
     {
@@ -159,7 +159,7 @@ class Repository
     /**
      * Get deployInfo
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getDeployInfo()
     {
@@ -182,7 +182,7 @@ class Repository
     /**
      * Get deployMethod
      *
-     * @return string 
+     * @return string
      */
     public function getDeployMethod()
     {
@@ -190,25 +190,25 @@ class Repository
     }
 
     /**
-     * Set env
+     * Set repo
      *
-     * @param array $env
+     * @param array $repo
      * @return Repository
      */
-    public function setEnv($env)
+    public function setRepo($repo)
     {
-        $this->env = $env;
+        $this->repo = $repo;
 
         return $this;
     }
 
     /**
-     * Get env
+     * Get repo
      *
-     * @return array 
+     * @return array
      */
-    public function getEnv()
+    public function getRepo()
     {
-        return $this->env;
+        return $this->repo;
     }
 }

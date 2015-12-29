@@ -5,3 +5,4 @@ bower_components
 app/cache
 app/logs
 web/bundles
+app/git_branch.db3

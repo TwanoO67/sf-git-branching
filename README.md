@@ -8,7 +8,7 @@ npm install
 composer update
 
 php app/console assets:install
-php app/console doctrine:schema:update --env=test --force
+php app/console doctrine:schema:create
 grunt serve --force
 
 génération de crud

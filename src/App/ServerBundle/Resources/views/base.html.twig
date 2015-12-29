@@ -59,8 +59,9 @@
              <span class="icon-bar" ></span>
            </button>
            {% block header_nav %}
-           <a class="navbar-brand" href="{{ app.request.getSchemeAndHttpHost() }}/admin/">Gestion GIT - BackOffice  </a>
-           <a class="navbar-brand" id='username_placeholder' onclick='changeUsername()' style='float:right'>UserName</a>
+           <a class="navbar-brand" href="{{ path('app_server_homepage',{}) }}" >Gestion GIT - Administration  </a>
+           <a class="navbar-brand" style='float:right' href="{{ path('_home',{}) }}">Dépots</a>
+           <!--<a class="navbar-brand" id='username_placeholder' onclick='changeUsername()' style='float:right'>UserName</a>-->
            {% endblock %}
 
     	</div>

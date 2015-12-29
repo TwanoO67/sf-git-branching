@@ -15,15 +15,15 @@ class RepositoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('path')
+            ->add('repo')
             ->add('nom')
             ->add('branching')
             ->add('deployInfo')
             ->add('deployMethod')
-            ->add('env')
+            ->add('path')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
