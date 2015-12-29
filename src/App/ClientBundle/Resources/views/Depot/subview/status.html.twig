@@ -1,0 +1,8 @@
+<script type="text/ng-template" id="subview/status.html">
+
+<h3>Status</h3>
+<p>{% for line in gitrepo.getStatusOutput() %}
+    {{ line }}<br/>
+{% endfor %}</p>
+
+</script>

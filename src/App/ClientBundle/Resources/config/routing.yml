@@ -5,3 +5,7 @@ _home:
 app_client_depot_list:
     path:     /depot/list
     defaults: { _controller: AppClientBundle:Depot:list }
+
+app_client_depot_show:
+    path:     /depot/{id}
+    defaults: { _controller: AppClientBundle:Depot:show }

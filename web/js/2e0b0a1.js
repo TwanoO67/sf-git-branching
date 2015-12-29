@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 //-------------------------------------------------------------------------
-app.config(['$interpolateProvider', '$routeProvider', function ($interpolateProvider, $routeProvider) {
+app.config(['$interpolateProvider', '$routeProvider', '$locationProvider', function ($interpolateProvider, $routeProvider, $locationProvider ) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
   //-----------------------------------
@@ -13,9 +13,13 @@ app.config(['$interpolateProvider', '$routeProvider', function ($interpolateProv
   }).when('/home/intro', {
     templateUrl: 'templates/intro.html',
     controller: 'introController'
+  }).when('/status', {
+    templateUrl: 'subview/status.html',
+    controller: 'pageController'
   }).otherwise({
-    redirectTo: '/home/a'
+    redirectTo: '/status'
   });
+  $locationProvider.hashPrefix('!');
 }]);
 //-------------------------------------------------------------------------
 app.controller('appController', ['$scope', '$location', function ($scope, $location) {
@@ -24,6 +28,9 @@ app.controller('appController', ['$scope', '$location', function ($scope, $locat
   $scope.gotoView = function (view) {
     $location.path('/' + view);
   };
+}]);
+app.controller('pageController', ['$scope', function ($scope) {
+  //$scope.subtitle = "Subtitle SlideA from Angular";
 }]);
 app.controller('homeSlideAController', ['$scope', function ($scope) {
   $scope.subtitle = "Subtitle SlideA from Angular";

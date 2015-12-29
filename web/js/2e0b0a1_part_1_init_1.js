@@ -4,7 +4,7 @@ app.config(['$interpolateProvider', '$routeProvider', '$locationProvider', funct
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
   //-----------------------------------
-  $routeProvider/*.when('/home/a', {
+  $routeProvider.when('/home/a', {
     templateUrl: 'modules/slideA.html',
     controller: 'homeSlideAController'
   }).when('/home/b', {
@@ -13,14 +13,8 @@ app.config(['$interpolateProvider', '$routeProvider', '$locationProvider', funct
   }).when('/home/intro', {
     templateUrl: 'templates/intro.html',
     controller: 'introController'
-  })*/.when('/status', {
+  }).when('/status', {
     templateUrl: 'subview/status.html',
-    controller: 'pageController'
-  }).when('/branche', {
-    templateUrl: 'subview/branche.html',
-    controller: 'pageController'
-  }).when('/log', {
-    templateUrl: 'subview/log.html',
     controller: 'pageController'
   }).otherwise({
     redirectTo: '/status'

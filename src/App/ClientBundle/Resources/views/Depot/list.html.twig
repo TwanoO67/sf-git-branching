@@ -1,0 +1,5 @@
+{% for depot in depots %}
+    <li><a href="{{ path("app_client_depot_show", { 'id': depot.id } ) }}">{{ depot.nom|e }}</a></li>
+{% else %}
+    <li>Ajouter vos depots dans la partie admin</li>
+{% endfor %}
