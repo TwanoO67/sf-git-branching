@@ -1,3 +1,7 @@
 _home:
     path:     /
     defaults: { _controller: AppClientBundle:App:home }
+
+app_client_depot_list:
+    path:     /depot/list
+    defaults: { _controller: AppClientBundle:Depot:list }
