@@ -13,12 +13,8 @@ class AppController extends Controller
     $common = $this->container->get('common');
     $test = $common->getTest();
 
-
-    $repo = new Repository('/Users/TwanoO/Documents/PERSO/GIT/sf-git-branch');
-
     return $this->render('AppClientBundle:Page:home.html.twig', array(
-      'title' => 'Title from Symfony',
-      'status' => $repo->getStatusOutput()
+      'title' => 'Title from Symfony'
     ));
   }
 }
