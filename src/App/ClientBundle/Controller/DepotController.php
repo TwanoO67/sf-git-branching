@@ -6,8 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-use GitElephant\Repository as GitRepo;
-
 class DepotController extends Controller
 {
 
@@ -28,7 +26,7 @@ class DepotController extends Controller
       return $this->render('AppClientBundle:Depot:index.html.twig', array(
         'title' => 'index du depot',
         'repo' => $repo,
-        'gitrepo' => new GitRepo($repo->getPath())
+        'gitrepo' => $repo->getGitRepo())
       ));
     }
 

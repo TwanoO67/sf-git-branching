@@ -3,6 +3,7 @@
 namespace App\ServerBundle\Entity\Depot;
 
 use Doctrine\ORM\Mapping as ORM;
+use GitElephant\Repository as GitElephant;
 
 /**
  * Repository
@@ -69,7 +70,7 @@ class Repository
       return $this->path."/.git/git_autopuller";
     }
 
-    public function setAutoPuller($value = "on", &$code = 0){
+    public function setAutoPuller($value = "on"){
         $reponse = array();
         if(chdir($this->path)){
             //on place le fichier pour le pull automatique
@@ -89,7 +90,17 @@ class Repository
     }
     /* FIN - Placement du semaphore autopuller */
 
-
+    //recuperation de l'objet GitElephant
+    private $gitRepo;
+    public function getGitRepo(){
+      if($this->gitRepo){
+        return $this->gitRepo;
+      }
+      else{
+        $this->gitRepo = new GitElephant($this->path);
+        return $this->gitRepo;
+      }
+    }
 
 
 
