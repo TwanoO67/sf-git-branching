@@ -26,7 +26,7 @@ class DepotController extends Controller
       return $this->render('AppClientBundle:Depot:index.html.twig', array(
         'title' => 'index du depot',
         'repo' => $repo,
-        'gitrepo' => $repo->getGitRepo())
+        'gitrepo' => $repo->getGitRepo()
       ));
     }
 

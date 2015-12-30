@@ -48,7 +48,7 @@ app.controller('appController', ['$scope', '$location', function ($scope, $locat
 
 }]);
 
-app.controller('subviewBranchController', ['$scope', function ($scope) {
+app.controller('subviewBranchController', ['$scope' , 'ngBootbox', function ($scope, $ngBootbox) {
   //recuperation de variable depuis php
   $scope.repo_path = repo_path;
   $scope.url_ajax =  url_ajax;
