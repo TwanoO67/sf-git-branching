@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="subview/status.html">
-
+<script>afficheAlerte('danger', 'CGI:', 'Attention le script CGI Pull doit avoir une adresse en absolue');</script>
 <h3>Status</h3>
 <p>{% for line in gitrepo.getStatusOutput() %}
     {{ line }}<br/>

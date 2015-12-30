@@ -15,13 +15,13 @@ app.config(['$interpolateProvider', '$routeProvider', '$locationProvider', funct
     controller: 'introController'
   })*/.when('/status', {
     templateUrl: 'subview/status.html',
-    controller: 'pageController'
+    controller: 'subviewController'
   }).when('/branche', {
     templateUrl: 'subview/branche.html',
-    controller: 'pageController'
+    controller: 'subviewController'
   }).when('/log', {
     templateUrl: 'subview/log.html',
-    controller: 'pageController'
+    controller: 'subviewController'
   }).otherwise({
     redirectTo: '/status'
   });
@@ -34,18 +34,19 @@ app.controller('appController', ['$scope', '$location', function ($scope, $locat
   $scope.gotoView = function (view) {
     $location.path('/' + view);
   };
+
+
 }]);
-app.controller('pageController', ['$scope', function ($scope) {
+app.controller('subviewController', ['$scope', function ($scope) {
   //$scope.subtitle = "Subtitle SlideA from Angular";
-}]);
-app.controller('homeSlideAController', ['$scope', function ($scope) {
-  $scope.subtitle = "Subtitle SlideA from Angular";
-}]);
-app.controller('homeSlideBController', ['$scope', function ($scope) {
-  $scope.subtitle = "Subtitle SlideB from Angular";
-}]);
-app.controller('introController', ['$scope', function ($scope) {
-  $scope.title = title;
-  $scope.subtitle = "Text from Symfony to Angular";
-  $scope.text = "intro";
+  $scope.afficheAlerte = function (type, titre, message){
+      contenu = '<div class="alert alert-'+type+' alert-dismissable">';
+      contenu += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+      if(titre != '')
+          contenu += '<strong>'+titre+'</strong> ';
+      contenu += message;
+      contenu += '</div>';
+
+      jQuery('#zone_alert').html(contenu);
+  };
 }]);
