@@ -4,4 +4,4 @@ app_server_admin_depot:
 
 app_server_homepage:
     path:     /admin
-    defaults: { _controller: AppServerBundle:Back:index }
+    defaults: { _controller: AppServerBundle:Depot\Repository:index }

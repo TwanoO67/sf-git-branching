@@ -1,7 +1,7 @@
 {% extends 'AppServerBundle::base.html.twig' %}
 
 {% block content -%}
-    <h1>Depot\Repository list</h1>
+    <h1>Administration des dépôts GIT</h1>
 
     <table class="records_list">
         <thead>
@@ -29,10 +29,10 @@
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('admin_depot_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_depot_show', { 'id': entity.id }) }}">voir</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_depot_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_depot_edit', { 'id': entity.id }) }}">modifier</a>
                     </li>
                 </ul>
                 </td>
@@ -44,7 +44,7 @@
         <ul>
         <li>
             <a href="{{ path('admin_depot_new') }}">
-                Create a new entry
+                Ajouter un nouveau dépôt
             </a>
         </li>
     </ul>
