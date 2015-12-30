@@ -8,8 +8,8 @@
      active
     {% endif %}
     ">
-      <span onClick="changeBranche('{{ branch.fullRef }}');" title="Permet de changer pour cette branche">{{ branch.name }} ({{ branch.fullRef }})</span>
-      <input type="button" title="Suppression de la branche" onclick="supprimeBranche('{{ branch.fullRef }}');" value="X"></input>
+      <span ng-click="changeBranche('{{ branch.fullRef }}');" title="Permet de changer pour cette branche">{{ branch.name }} ({{ branch.fullRef }})</span>
+      <input type="button" title="Suppression de la branche" ng-click="supprimeBranche('{{ branch.fullRef }}');" value="X"></input>
     </a><br/>
   {% endfor %}</p>
 

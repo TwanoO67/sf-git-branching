@@ -1,5 +1,4 @@
 <script type="text/ng-template" id="subview/status.html">
-<script>afficheAlerte('danger', 'CGI:', 'Attention le script CGI Pull doit avoir une adresse en absolue');</script>
 <h3>Status</h3>
 <p>{% for line in gitrepo.getStatusOutput() %}
     {{ line }}<br/>
@@ -8,9 +7,9 @@
 <hr>
 <strong>Pull Automatique:</strong>
 <div class="btn-group pull-right btn-toggle" id='btn_autopuller' >
-  <button class="btn_pull_auto btn" id="puller_on" onclick="setAutoPuller('on');" >
+  <button class="btn_pull_auto btn" id="puller_on" ng-click="setAutoPuller('on');" >
   ON</button>
-  <button class="btn_pull_auto btn active btn-default btn-primary" id="puller_off" onclick="setAutoPuller('off');">
+  <button class="btn_pull_auto btn active btn-default btn-primary" id="puller_off" ng-click="setAutoPuller('off');">
   OFF</button>
   {% if repo.getAutoPuller() %}
       <script>changeColorButton($('.btn_pull_auto'));</script>
