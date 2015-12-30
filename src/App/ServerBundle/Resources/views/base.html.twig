@@ -75,7 +75,7 @@
         <div class="affix-top" data-spy="affix" data-offset-top="45" data-offset-bottom="90">
           <ul class="nav" id="sidebar-nav">
             {% block sider_nav %}
-            <li><a href="http://test.weberantoine.fr/GIT/?module=nest">Nest</a></li>
+              {{ render(controller('AppClientBundle:Depot:list')) }}
             {% endblock %}
           </ul>
          </div>
