@@ -2,7 +2,7 @@
 <h3>Historique</h3>
 
 <p>{% for commit in gitrepo.getLog() %}
-    {{ commit.getMessage() }}<br/>
+    {{ commit.getDatetimeAuthor().format('d/m/Y') }} - {{ commit.getauthor() }} -{{ commit.getMessage() }}<br/>
 {% endfor %}</p>
 
 </script>
