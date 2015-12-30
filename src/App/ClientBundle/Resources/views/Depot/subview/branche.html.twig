@@ -3,7 +3,14 @@
   <h3>Liste des branches</h3>
 
   <p>{% for branch in gitrepo.getBranches() %}
-      {{ branch.name }} ({{ branch.fullRef }})<br/>
+    <a class="list-group-item
+    {% if branch == gitrepo.getMainBranch() %}
+     active
+    {% endif %}
+    ">
+      <span onClick="changeBranche('{{ branch.fullRef }}');" title="Permet de changer pour cette branche">{{ branch.name }} ({{ branch.fullRef }})</span>
+      <input type="button" title="Suppression de la branche" onclick="supprimeBranche('{{ branch.fullRef }}');" value="X"></input>
+    </a><br/>
   {% endfor %}</p>
 
 </script>
