@@ -1,8 +1,14 @@
 # sf-git-branching
-Gestionnaire de repo GIT, sous forme de bundle symfony2
+Gestionnaire de dépot GIT, sous forme d'application web symfony2
+( permet de déployer automatiquement avec GIT en PHP )
 
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c4e5d688-c273-4791-8894-c5c2b4d9e408/big.png)](https://insight.sensiolabs.com/projects/c4e5d688-c273-4791-8894-c5c2b4d9e408)
 
 INSTALLATION
+
+Copier app/config/parameters.yml.dist en parameters.yml
+
 
 npm install
 composer update
