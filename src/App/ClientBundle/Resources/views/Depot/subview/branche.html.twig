@@ -1,6 +1,9 @@
 <script type="text/ng-template" id="subview/branche.html">
 
+  <h3>Liste des branches</h3>
 
-  CONTENU BRANCHE
+  <p>{% for branch in gitrepo.getBranches() %}
+      {{ branch.name }} ({{ branch.fullRef }})<br/>
+  {% endfor %}</p>
 
 </script>
