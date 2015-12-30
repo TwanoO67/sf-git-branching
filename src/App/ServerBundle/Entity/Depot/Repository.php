@@ -64,6 +64,38 @@ class Repository
     private $repo;
 
 
+    /* Placement du semaphore autopuller */
+    public function getAutoPullerPath(){
+      return $this->path."/.git/git_autopuller";
+    }
+
+    public function setAutoPuller($value = "on", &$code = 0){
+        $reponse = array();
+        if(chdir($this->path)){
+            //on place le fichier pour le pull automatique
+            if($value == "on"){
+                file_put_contents($this->getAutoPullerPath(), '');
+            }
+            //sinon on le supprime
+            elseif(file_exists($this->getAutoPullerPath())){
+                unlink($this->getAutoPullerPath());
+            }
+        }
+        return $reponse;
+    }
+
+    public function getAutoPuller(){
+        return file_exists($this->getAutoPullerPath());
+    }
+    /* FIN - Placement du semaphore autopuller */
+
+
+
+
+
+
+
+
     /**
      * Get id
      *

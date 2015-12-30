@@ -5,4 +5,16 @@
     {{ line }}<br/>
 {% endfor %}</p>
 
+<hr>
+<strong>Pull Automatique:</strong>
+<div class="btn-group pull-right btn-toggle" id='btn_autopuller' >
+  <button class="btn_pull_auto btn" id="puller_on" onclick="setAutoPuller('on');" >
+  ON</button>
+  <button class="btn_pull_auto btn active btn-default btn-primary" id="puller_off" onclick="setAutoPuller('off');">
+  OFF</button>
+  {% if repo.getAutoPuller() %}
+      <script>changeColorButton($('.btn_pull_auto'));</script>
+  {% endif %}
+</div>
+
 </script>
