@@ -1,6 +1,6 @@
 # sf-git-branching
-Gestionnaire de dépot GIT, sous forme d'application web symfony2
-( permet de déployer automatiquement avec GIT en PHP )
+Interface web de gestion pour vos dépots GIT
+( permet de déployer automatiquement avec GIT en PHP, sans utiliser la console ssh )
 
 ![Index screenshot](/web/images/screenshots/local-500x500-index.png?raw=true "Index")
 
