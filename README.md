@@ -17,10 +17,10 @@ grunt serve
 
 # TODOLIST
 
-Implémenter le pull automatiquement
-checkout de tag et de branche
-webhooks depuis github / gitlab
-ajout de repo par git clone
+- Implémenter le pull automatiquement
+- Checkout de tag et de branche
+- Webhooks depuis github / gitlab
+- Ajout de repo par git clone
 
 
 source: https://github.com/zguillez/generator-symfonangular
