@@ -20,7 +20,7 @@ module.exports = function (grunt) {
               path: "web",
               port: 8000,
               files: [
-                { src: "app_dev.php/depot/1#!/status", dest: "index.png", delay: 200 }
+                { src: "app.php/depot/1#!/status", dest: "index.png", delay: 200 }
               ]
             },
             viewport: ['1024x768', '500x500']
