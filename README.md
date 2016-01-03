@@ -48,4 +48,5 @@ lancer la commande: grunt autoshot
 
 
 #Copyright et fork
-source: https://github.com/zguillez/generator-symfonangular
+- https://github.com/zguillez/generator-symfonangular
+- https://github.com/matteosister/GitElephant

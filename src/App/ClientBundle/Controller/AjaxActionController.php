@@ -5,6 +5,8 @@ namespace App\ClientBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AjaxActionController extends Controller
 {
@@ -44,14 +46,17 @@ class AjaxActionController extends Controller
                   break;
               case "pull":
                   $current_repo->pull();
+                  $retour['data'] = $current_repo->getCaller()->getOutput();
                   $retour['code'] = "ok";
                   break;
               case "checkout":
                   $current_repo->checkout($branche);
+                  $retour['data'] = $current_repo->getCaller()->getOutput();
                   $retour['code'] = "ok";
                   break;
               case "fetch":
                   $current_repo->fetch();
+                  $retour['data'] = $current_repo->getCaller()->getOutput();
                   $retour['code'] = "ok";
                   break;
               case "autopuller":
@@ -60,6 +65,7 @@ class AjaxActionController extends Controller
                   break;
               case "delete":
                   $current_repo->deleteBranch($branche);
+                  $retour['data'] = $current_repo->getCaller()->getOutput();
                   $retour['code'] = "ok";
                   break;
           }
@@ -70,7 +76,7 @@ class AjaxActionController extends Controller
           $retour['data'] = 'Dépot inexistant: '.$repo_path;
       }
 
-      echo json_encode($retour);
+     return new Response(json_encode($retour));
     }
 
 }
