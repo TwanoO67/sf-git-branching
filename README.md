@@ -2,6 +2,8 @@
 Gestionnaire de dépot GIT, sous forme d'application web symfony2
 ( permet de déployer automatiquement avec GIT en PHP )
 
+![Index screenshot](/web/images/screenshots/local-500x500-index.png?raw=true "Index")
+
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/c4e5d688-c273-4791-8894-c5c2b4d9e408/big.png)](https://insight.sensiolabs.com/projects/c4e5d688-c273-4791-8894-c5c2b4d9e408)
 [![Code Climate](https://codeclimate.com/github/TwanoO67/sf-git-branching/badges/gpa.svg)](https://codeclimate.com/github/TwanoO67/sf-git-branching)
