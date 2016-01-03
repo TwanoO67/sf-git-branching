@@ -22,3 +22,9 @@ grunt serve
 
 génération de crud
 php app/console generate:doctrine:crud --format=yml --with-write --overwrite
+
+screenshot de l'appli
+installer: http://phantomjs.org/download.html
+configurer les screenshots dans: Gruntfile.js
+(tester que phantomjs soit dans le path est arrive à générer des images)
+lancer la commande: grunt autoshot

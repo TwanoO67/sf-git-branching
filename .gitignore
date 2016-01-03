@@ -8,3 +8,4 @@ web/bundles
 web/js
 web/css
 app/git_branch.db3
+.DS_Store

@@ -2,7 +2,34 @@
 
 module.exports = function (grunt) {
 
-  grunt.initConfig({});
+  grunt.initConfig({
+
+    //prendre des screenshot locaux
+    autoshot: {
+        default_options: {
+          options: {
+            // necessary config
+            path: "web/images/screenshots/",
+            // optional config, must set either remote or local
+            remote: {
+              files: [
+              //  { src: REMOTE_SITE_URL, dest: FILENAME(INCLUDE FILE TYPE), delay: DELAY_MILLISECOND }
+              ]
+            },
+            local: {
+              path: "web",
+              port: 8000,
+              files: [
+                { src: "app_dev.php/depot/1#!/status", dest: "index.png", delay: 200 }
+              ]
+            },
+            viewport: ['1024x768', '500x500']
+          },
+        },
+      },
+
+
+  });
 
   grunt.registerTask('default', ['php']);
 
@@ -29,4 +56,5 @@ module.exports = function (grunt) {
 
   });
 
+  grunt.loadNpmTasks('grunt-autoshot');
 };
