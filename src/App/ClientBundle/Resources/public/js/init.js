@@ -14,7 +14,13 @@ app.config(['$interpolateProvider', '$routeProvider', '$locationProvider', funct
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
   //-----------------------------------
-  $routeProvider/*.when('/home/a', {
+  $routeProvider.when('/tag', {
+    templateUrl: 'subview/tag.html',
+    controller: 'subviewController'
+  }).when('/remote', {
+    templateUrl: 'subview/remote.html',
+    controller: 'subviewController'
+  })/*.when('/home/a', {
     templateUrl: 'modules/slideA.html',
     controller: 'homeSlideAController'
   }).when('/home/b', {
@@ -54,34 +60,34 @@ app.controller('subviewBranchController', ['$scope' , 'ngBootbox', function ($sc
   $scope.url_ajax =  url_ajax;
 
   $scope.changeBranche = function(branche){
-    bootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur la branche <strong>"+branche+"</strong> ?",
-     function(result) {
-          if(result){
-            jQuery.ajax(url_ajax,{
-                    dataType: 'json',
-                    data: {
-                        action: 'checkout',
-                        repo: repo_path,
-                        branche: branche,
-                    },
-                    success: function(data, textStatus, jqXHR){
-                        if(data.code == 'success'){
-                            //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
-                            document.location.reload();
-                        }
-                        else{
-                            afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!<br/>Vérifier le status du depot!");
-                            console.log(data);
-                        }
-                    },
-                    error: function(jqXHR,textStatus, errorThrown){
-                        afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!");
-                        console.log(jqXHR.responseText);
-                    }
+    $ngBootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur la branche <strong>"+branche+"</strong> ?")
+    .then(function() {
 
-                }
-            );
-        }
+        $http({
+          method: 'GET',
+          url: url_ajax,
+          dataType: 'json',
+          data: {
+              action: 'checkout',
+              repo: repo_path,
+              branche: branche,
+          }
+        }).then(function successCallback(response) {
+          if(response.data.code == 'success'){
+              //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
+              document.location.reload();
+          }
+          else{
+              afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!<br/>Vérifier le status du depot!");
+              console.log(response.data);
+          }
+        }, function errorCallback(response) {
+            afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!");
+            console.log(response.data);
+      });
+
+    }, function() {
+        console.log('Confirm dismissed!');
     });
   }
 

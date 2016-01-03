@@ -1,0 +1,16 @@
+<script type="text/ng-template" id="subview/tag.html">
+
+  <h3>Liste des tags</h3>
+
+  <p>{% for tag in gitrepo.getTags() %}
+    <a class="list-group-item
+    {% if tag == gitrepo.getLastTag() %}
+     active
+    {% endif %}
+    ">
+      <span ng-click="changeTag('{{ tag.fullRef }}');" title="Permet de changer pour ce tag">{{ tag.name }} ({{ tag.fullRef }})</span>
+      <input type="button" title="Suppression du tag" ng-click="supprimeTag('{{ tag.fullRef }}');" value="X"></input>
+    </a><br/>
+  {% endfor %}</p>
+
+</script>

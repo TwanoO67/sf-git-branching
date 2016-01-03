@@ -6,6 +6,8 @@
     {% include 'AppClientBundle::Depot/subview/status.html.twig' %}
     {% include 'AppClientBundle::Depot/subview/branche.html.twig' %}
     {% include 'AppClientBundle::Depot/subview/log.html.twig' %}
+    {% include 'AppClientBundle::Depot/subview/tag.html.twig' %}
+    {% include 'AppClientBundle::Depot/subview/remote.html.twig' %}
     <div class="row">
       <div class="col-xs-12">
 
@@ -14,6 +16,8 @@
             <a class="btn btn-default" ng-click="gotoView('status')">STATUS</a>
             <a class="btn btn-default" ng-click="gotoView('branche')">BRANCHE</a>
             <a class="btn btn-default" ng-click="gotoView('log')">HISTORIQUE</a>
+            <a class="btn btn-default" ng-click="gotoView('tag')">TAG</a>
+            <a class="btn btn-default" ng-click="gotoView('remote')">REMOTE</a>
             <div ng-view></div>
           </div>
         </div>
