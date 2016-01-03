@@ -10,15 +10,16 @@ Gestionnaire de dépot GIT, sous forme d'application web symfony2
 
 # INSTALLATION
 
-git clone du repo
-npm install
-bower install
-composer install
+Clone du depot sur votre machine
+
+- npm install
+- bower install
+- composer install
 
 Copier app/config/parameters.yml.dist en parameters.yml
 
-php app/console doctrine:schema:create
-grunt serve
+- php app/console doctrine:schema:create
+- grunt serve
 
 Commencer par remplir vos depot dans la partie admin (user/mdp -> admin/gitadmin)
 Changer les identifiants de connexion dans le fichier app/config/security.yml
