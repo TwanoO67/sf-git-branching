@@ -22,6 +22,7 @@ Copier app/config/parameters.yml.dist en parameters.yml
 - grunt serve
 
 Commencer par remplir vos depot dans la partie admin (user/mdp -> admin/gitadmin)
+
 Changer les identifiants de connexion dans le fichier app/config/security.yml
 
 # TODOLIST
