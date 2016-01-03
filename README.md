@@ -10,10 +10,18 @@ Gestionnaire de dépot GIT, sous forme d'application web symfony2
 
 # INSTALLATION
 
+git clone du repo
+npm install
+bower install
+composer install
+
 Copier app/config/parameters.yml.dist en parameters.yml
 
 php app/console doctrine:schema:create
 grunt serve
+
+Commencer par remplir vos depot dans la partie admin (user/mdp -> admin/gitadmin)
+Changer les identifiants de connexion dans le fichier app/config/security.yml
 
 # TODOLIST
 
@@ -21,12 +29,6 @@ grunt serve
 - Checkout de tag et de branche
 - Webhooks depuis github / gitlab
 - Ajout de repo par git clone
-
-
-source: https://github.com/zguillez/generator-symfonangular
-npm install
-bower install
-composer install
 
 # Plus d'action
 
@@ -41,3 +43,7 @@ installer: http://phantomjs.org/download.html
 configurer les screenshots dans: Gruntfile.js
 (tester que phantomjs soit dans le path est arrive à générer des images)
 lancer la commande: grunt autoshot
+
+
+#Copyright et fork
+source: https://github.com/zguillez/generator-symfonangular

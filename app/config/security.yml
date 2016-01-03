@@ -16,10 +16,10 @@ security:
         in_memory:
             memory:
                 users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-                    antoine:
-                      password: antoine67
+                    #user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    #admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                    admin:
+                      password: gitadmin
                       roles: [ 'ROLE_ADMIN']
     #    fos_userbundle:
     #                id: fos_user.user_provider.username
