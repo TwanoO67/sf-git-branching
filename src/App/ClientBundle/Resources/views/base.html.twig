@@ -17,11 +17,11 @@
   <script src="{{ asset('lib/scripts/angular-route.min.js') }}"></script>
   <script src="{{ asset('lib/scripts/bootstrap.min.js') }}"></script>
   <script src="{{ asset('lib/scripts/html5shiv.min.js') }}"></script>
-  <script src="{{ asset('lib/scripts/ngBootbox.js') }}"></script>
-  {% javascripts
-  '@AppClientBundle/Resources/public/js/*.js' %}
-  <script src="{{ asset_url }}"></script>
+
+  {% javascripts '@AppClientBundle/Resources/public/js/*.js' %}
+    <script src="{{ asset_url }}"></script>
   {% endjavascripts %}
+
 {% endblock %}
 
 {% block body %}

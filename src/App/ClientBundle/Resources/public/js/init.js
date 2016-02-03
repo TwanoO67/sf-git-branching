@@ -1,4 +1,8 @@
 var app = angular.module('App', ['ngRoute']);
+requirejs(['/lib/scripts/bootbox.js'],function(elem){
+  window.bootbox = elem;
+});
+
 var afficheAlerte = function (type, titre, message){
     contenu = '<div class="alert alert-'+type+' alert-dismissable">';
     contenu += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
@@ -9,6 +13,15 @@ var afficheAlerte = function (type, titre, message){
 
     jQuery('#zone_alert').html(contenu);
 };
+
+function nettoieBranchName(name){
+  if(name.indexOf("refs/heads/") !== -1){
+    var tab = name.split("refs/heads/");
+    console.log(tab);
+    name = tab[1];
+  }
+  return name;
+}
 //-------------------------------------------------------------------------
 app.config(['$interpolateProvider', '$routeProvider', '$locationProvider', function ($interpolateProvider, $routeProvider, $locationProvider ) {
   $interpolateProvider.startSymbol('[[');
@@ -54,78 +67,89 @@ app.controller('appController', ['$scope', '$location', function ($scope, $locat
 
 }]);
 
-app.controller('subviewBranchController', ['$scope' , 'ngBootbox', function ($scope, $ngBootbox) {
+app.controller('subviewBranchController', function ($scope, $http) {
   //recuperation de variable depuis php
   $scope.repo_path = repo_path;
   $scope.url_ajax =  url_ajax;
 
+
   $scope.changeBranche = function(branche){
-    $ngBootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur la branche <strong>"+branche+"</strong> ?")
-    .then(function() {
+    window.bootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur la branche <strong>"+branche+"</strong> ?",
+    function(retour) {
+      if(retour){
 
-        $http({
-          method: 'GET',
-          url: url_ajax,
-          dataType: 'json',
-          data: {
-              action: 'checkout',
-              repo: repo_path,
-              branche: branche,
+        jQuery.ajax({
+            method: 'POST',
+            url: url_ajax,
+            dataType: 'json',
+            data: {
+                action: 'checkout',
+                repo_path: $scope.repo_path,
+                branche: nettoieBranchName(branche),
+            },
+            success: function(response) {
+              if(response.data.code == 'success'){
+                  //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
+                  document.location.reload();
+              }
+              else{
+                  afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!<br/>Vérifier le status du depot!");
+                  console.log(response.data);
+              }
+            },
+            error: function(response) {
+                afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!");
+                console.log(response);
           }
-        }).then(function successCallback(response) {
-          if(response.data.code == 'success'){
-              //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
-              document.location.reload();
-          }
-          else{
-              afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!<br/>Vérifier le status du depot!");
-              console.log(response.data);
-          }
-        }, function errorCallback(response) {
-            afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!");
-            console.log(response.data);
-      });
+        });
 
-    }, function() {
-        console.log('Confirm dismissed!');
+
+
+    }
+
+
     });
+
   }
 
   $scope.supprimeBranche = function(branche){
 
-        bootbox.confirm("Etes-vous sûr de vouloir supprimer la branche <strong>"+branche+"</strong> ?",
-         function(result) {
+        window.bootbox.confirm("Etes-vous sûr de vouloir supprimer la branche <strong>"+branche+"</strong> ?",
+        function(result) {
               if(result){
-                jQuery.ajax(url_ajax,{
-                        dataType: 'json',
-                        data: {
-                            action: 'delete',
-                            repo: repo_path,
-                            branche: branche,
-                        },
-                        success: function(data, textStatus, jqXHR){
-                            if(data.code == 'success'){
-                                //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
-                                document.location.reload();
-                            }
-                            else{
-                                afficheAlerte('danger',"Delete","La suppression de branche à fait une erreur!");
-                                console.log(data);
-                            }
-                        },
-                        error: function(jqXHR,textStatus, errorThrown){
-                            afficheAlerte('danger',"Delete","La suppression de branche à fait une erreur!");
-                            console.log(jqXHR.responseText);
-                        }
 
-                    }
-                );
+                jQuery.ajax({
+                    method: 'POST',
+                    url: url_ajax,
+                    dataType: 'json',
+                    data: {
+                        action: 'delete',
+                        repo_path: $scope.repo_path,
+                        branche: nettoieBranchName(branche),
+                    },
+                    success: function(response) {
+                      if(response.data.code == 'success'){
+                          //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
+                          document.location.reload();
+                      }
+                      else{
+                          afficheAlerte('danger',"Delete","La suppression de branche à fait une erreur!");
+                          console.log(response.data);
+                      }
+                    },
+                    error: function(response) {
+                      afficheAlerte('danger',"Delete","La suppression de branche à fait une erreur!");
+                      console.log(response);
+                  }
+                });
+
+
             }
         });
 
     }
 
-}]);
+});
 
 app.controller('subviewController', ['$scope', function ($scope) {
   //$scope.subtitle = "Subtitle SlideA from Angular";

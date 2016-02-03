@@ -19,10 +19,10 @@ class AjaxActionController extends Controller
       $retour['data'] = '';
 
       //parametres possibles
-      $action = $request->query->get('action');
-      $repo_path = $request->query->get('repo_path');
-      $branche = $request->query->get('branche');
-      $value = $request->query->get('value');
+      $action = $request->request->get('action');
+      $repo_path = $request->request->get('repo_path');
+      $branche = $request->request->get('branche');
+      $value = $request->request->get('value');
 
       $retour['repo_path'] = $repo_path;
 
