@@ -2,11 +2,11 @@
 
   <h3>Liste des dépôt distants</h3>
 
-  <p>{% for remote in gitrepo.getRemotes() %}
+  <p>{#% for remote in gitrepo.getRemotes() %}
     <a class="list-group-item">
       {{ remote.getName() }} ({{ remote.getFetchURL() }})
       <input type="button" title="Suppression du remote" ng-click="supprimeRemote('{{ remote.getName() }}');" value="X"></input>
     </a><br/>
-  {% endfor %}</p>
+  {% endfor %#}</p>
 
 </script>

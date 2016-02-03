@@ -4,7 +4,10 @@
     {{ line }}<br/>
 {% endfor %}</p>
 
-<hr>
+<hr/>
+<button class="btn btn-default" title="Pull Manuel" ng-click="pull();" >Pull Manuel</button>
+
+<hr/>
 <strong>Pull Automatique:</strong>
 <div class="btn-group pull-right btn-toggle" id='btn_autopuller' >
   <button class="btn_pull_auto btn" id="puller_on" ng-click="setAutoPuller('on');" >

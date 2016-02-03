@@ -17,11 +17,23 @@ var afficheAlerte = function (type, titre, message){
 function nettoieBranchName(name){
   if(name.indexOf("refs/heads/") !== -1){
     var tab = name.split("refs/heads/");
-    console.log(tab);
     name = tab[1];
   }
   return name;
 }
+
+function contactWebService(dataTab,successFct,errorFct){
+  console.log('Appel Ajax aux webservices');
+  jQuery.ajax({
+      method: 'POST',
+      url: url_ajax,
+      dataType: 'json',
+      data: dataTab,
+      success: successFct,
+      error: errorFct
+  });
+}
+
 //-------------------------------------------------------------------------
 app.config(['$interpolateProvider', '$routeProvider', '$locationProvider', function ($interpolateProvider, $routeProvider, $locationProvider ) {
   $interpolateProvider.startSymbol('[[');
@@ -72,38 +84,90 @@ app.controller('subviewBranchController', function ($scope, $http) {
   $scope.repo_path = repo_path;
   $scope.url_ajax =  url_ajax;
 
-
-  $scope.changeBranche = function(branche){
-    window.bootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur la branche <strong>"+branche+"</strong> ?",
+  $scope.changeTag = function(tag){
+    window.bootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur le tag <strong>"+tag+"</strong> ?",
     function(retour) {
       if(retour){
 
-        jQuery.ajax({
-            method: 'POST',
-            url: url_ajax,
-            dataType: 'json',
-            data: {
-                action: 'checkout',
-                repo_path: $scope.repo_path,
-                branche: nettoieBranchName(branche),
-            },
-            success: function(response) {
-              if(response.data.code == 'success'){
-                  //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
-                  document.location.reload();
-              }
-              else{
-                  afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!<br/>Vérifier le status du depot!");
-                  console.log(response.data);
-              }
-            },
-            error: function(response) {
-                afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!");
-                console.log(response);
+        contactWebService(
+          {
+            action: 'checkout',
+            repo_path: $scope.repo_path,
+            branche: tag,
+          },
+          function(response) {
+            if(response.code == 'ok'){
+                //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
+                document.location.reload();
+            }
+            else{
+                afficheAlerte('danger',"Checkout","Le changement de tag à fait une erreur!<br/>Vérifier le status du depot!");
+                console.log(response.data);
+            }
+          },
+          function(response) {
+            afficheAlerte('danger',"Checkout","Le changement de tag à fait une erreur!");
+            console.log(response);
           }
-        });
+      );
+
+    }
 
 
+    });
+
+  }
+
+  $scope.pull = function(){
+        contactWebService(
+          {
+            action: 'pull',
+            repo_path: $scope.repo_path,
+          },
+          function(response) {
+            if(response.code == 'ok'){
+                //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
+                document.location.reload();
+            }
+            else{
+                afficheAlerte('danger',"Checkout","Le pull à fait une erreur!<br/>Vérifier le status du depot!");
+                console.log(response.data);
+            }
+          },
+          function(response) {
+            afficheAlerte('danger',"Checkout","Le pull à fait une erreur!");
+            console.log(response);
+          }
+      );
+  }
+
+  $scope.changeBranche = function(branche){
+    var cleaned_branch = nettoieBranchName(branche);
+    window.bootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur la branche <strong>"+cleaned_branch+"</strong> ?",
+    function(retour) {
+      if(retour){
+
+        contactWebService(
+          {
+            action: 'checkout',
+            repo_path: $scope.repo_path,
+            branche: cleaned_branch,
+          },
+          function(response) {
+            if(response.code == 'ok'){
+                //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
+                document.location.reload();
+            }
+            else{
+                afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!<br/>Vérifier le status du depot!");
+                console.log(response.data);
+            }
+          },
+          function(response) {
+            afficheAlerte('danger',"Checkout","Le changement de branche à fait une erreur!");
+            console.log(response);
+          }
+      );
 
     }
 
@@ -113,36 +177,31 @@ app.controller('subviewBranchController', function ($scope, $http) {
   }
 
   $scope.supprimeBranche = function(branche){
-
-        window.bootbox.confirm("Etes-vous sûr de vouloir supprimer la branche <strong>"+branche+"</strong> ?",
+        var cleaned_branch = nettoieBranchName(branche);
+        window.bootbox.confirm("Etes-vous sûr de vouloir supprimer la branche <strong>"+cleaned_branch+"</strong> ?",
         function(result) {
               if(result){
 
-                jQuery.ajax({
-                    method: 'POST',
-                    url: url_ajax,
-                    dataType: 'json',
-                    data: {
-                        action: 'delete',
-                        repo_path: $scope.repo_path,
-                        branche: nettoieBranchName(branche),
-                    },
-                    success: function(response) {
-                      if(response.data.code == 'success'){
-                          //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
-                          document.location.reload();
-                      }
-                      else{
-                          afficheAlerte('danger',"Delete","La suppression de branche à fait une erreur!");
-                          console.log(response.data);
-                      }
-                    },
-                    error: function(response) {
-                      afficheAlerte('danger',"Delete","La suppression de branche à fait une erreur!");
-                      console.log(response);
-                  }
-                });
-
+                contactWebService({
+                    action: 'delete',
+                    repo_path: $scope.repo_path,
+                    branche: cleaned_branch,
+                  },
+                 function(response) {
+                    if(response.code == 'ok'){
+                        //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
+                        document.location.reload();
+                    }
+                    else{
+                        afficheAlerte('danger',"Delete","La suppression de branche à fait une erreur!");
+                        console.log(response.data);
+                    }
+                  },
+                  function(response) {
+                    afficheAlerte('danger',"Delete","La suppression de branche à fait une erreur!");
+                    console.log(response);
+                }
+              );
 
             }
         });
