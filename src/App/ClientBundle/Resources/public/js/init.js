@@ -84,63 +84,6 @@ app.controller('subviewBranchController', function ($scope, $http) {
   $scope.repo_path = repo_path;
   $scope.url_ajax =  url_ajax;
 
-  $scope.changeTag = function(tag){
-    window.bootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur le tag <strong>"+tag+"</strong> ?",
-    function(retour) {
-      if(retour){
-
-        contactWebService(
-          {
-            action: 'checkout',
-            repo_path: $scope.repo_path,
-            branche: tag,
-          },
-          function(response) {
-            if(response.code == 'ok'){
-                //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
-                document.location.reload();
-            }
-            else{
-                afficheAlerte('danger',"Checkout","Le changement de tag à fait une erreur!<br/>Vérifier le status du depot!");
-                console.log(response.data);
-            }
-          },
-          function(response) {
-            afficheAlerte('danger',"Checkout","Le changement de tag à fait une erreur!");
-            console.log(response);
-          }
-      );
-
-    }
-
-
-    });
-
-  }
-
-  $scope.pull = function(){
-        contactWebService(
-          {
-            action: 'pull',
-            repo_path: $scope.repo_path,
-          },
-          function(response) {
-            if(response.code == 'ok'){
-                //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
-                document.location.reload();
-            }
-            else{
-                afficheAlerte('danger',"Checkout","Le pull à fait une erreur!<br/>Vérifier le status du depot!");
-                console.log(response.data);
-            }
-          },
-          function(response) {
-            afficheAlerte('danger',"Checkout","Le pull à fait une erreur!");
-            console.log(response);
-          }
-      );
-  }
-
   $scope.changeBranche = function(branche){
     var cleaned_branch = nettoieBranchName(branche);
     window.bootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur la branche <strong>"+cleaned_branch+"</strong> ?",
@@ -212,6 +155,61 @@ app.controller('subviewBranchController', function ($scope, $http) {
 
 app.controller('subviewController', ['$scope', function ($scope) {
   //$scope.subtitle = "Subtitle SlideA from Angular";
+
+  $scope.changeTag = function(tag){
+    window.bootbox.confirm("Etes-vous sûr de vouloir changer le dépot courant sur le tag <strong>"+tag+"</strong> ?",
+    function(retour) {
+      if(retour){
+
+        contactWebService(
+          {
+            action: 'checkout',
+            repo_path: repo_path,
+            branche: tag,
+          },
+          function(response) {
+            if(response.code == 'ok'){
+                //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
+                document.location.reload();
+            }
+            else{
+                afficheAlerte('danger',"Checkout","Le changement de tag à fait une erreur!<br/>Vérifier le status du depot!");
+                console.log(response.data);
+            }
+          },
+          function(response) {
+            afficheAlerte('danger',"Checkout","Le changement de tag à fait une erreur!");
+            console.log(response);
+          }
+      );
+
+    }
+    });
+  }
+
+  $scope.pull = function(){
+        contactWebService(
+          {
+            action: 'pull',
+            repo_path: repo_path,
+          },
+          function(response) {
+            if(response.code == 'ok'){
+                //afficheAlerte('success',"Checkout","Le changement de branche à fonctionné!");
+                document.location.reload();
+            }
+            else{
+                afficheAlerte('danger',"Pull","Le pull à fait une erreur!<br/>Vérifier le status du depot!");
+                console.log(response.data);
+            }
+          },
+          function(response) {
+            afficheAlerte('danger',"Pull","Le pull à fait une erreur!");
+            console.log(response);
+          }
+      );
+  }
+
   $scope.test = function(a){
     alert(a);
   }
